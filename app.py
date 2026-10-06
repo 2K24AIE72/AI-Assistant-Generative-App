@@ -13,14 +13,15 @@ import os
 import streamlit as st
 import google.generativeai as genai
 
-api_key = st.secrets.get("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY")
-genai.configure(api_key=api_key)
+api_key = st.secrets.get("GEMINI_API_KEY") if "GEMINI_API_KEY" in st.secrets else os.getenv("GEMINI_API_KEY")
 
 if api_key:
     genai.configure(api_key=api_key)
+else:
+    st.error("Please set your GEMINI_API_KEY in Streamlit secrets.")
     
     # Model configuration (Using gemini-pro to avoid 1.5/2.5 version number errors)
-    model = genai.GenerativeModel('gemini-3.8-flash')
+    model = genai.GenerativeModel('gemini-1.5-flash')
 
     # Initialize chat history in session state
     if "messages" not in st.session_state:
