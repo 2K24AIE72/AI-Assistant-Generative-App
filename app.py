@@ -21,7 +21,7 @@ else:
     st.error("Please set your GEMINI_API_KEY in Streamlit secrets.")
     
     # Model configuration (Using gemini-pro to avoid 1.5/2.5 version number errors)
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    model = genai.GenerativeModel('gemini-2.0-flash')
 
     # Initialize chat history in session state
     if "messages" not in st.session_state:
